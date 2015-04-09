@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy import (
     Column,
     Index,
@@ -25,3 +26,26 @@ class MyModel(Base):
     value = Column(Integer)
 
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
+
+class Entry(Base):
+    __tablename__ = 'entries'
+    id = Column(Integer, primary_key=True)
+    title = Column(Unicode(255), unique=True, nullable=False)
+    body = Column(UnicodeText, default=u'')
+    created = Column(DateTime, default=datetime.datetime.utcnow)
+    edited = Column(DateTime, default=datetime.datetime.utcnow)
+
+    @classmethod
+    def all(cls, session=None):
+        #The entry class should support a classmethod all that returns all the entries in the database, ordered so
+        # that the most recent entry is first
+        if session is None:
+            session = DBSession
+        return session.query(cls).order_by(sa.desc(cls.created)).all()
+
+    @classmethod
+    def by_id(cls, id, session=None):
+        #The entry class should support a classmethod by_id that returns a single entry, given an id.
+        if session is None:
+            session = DBSession
+        return session.query(cls).get(id)
