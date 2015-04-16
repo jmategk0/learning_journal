@@ -1,5 +1,6 @@
 pyramid
-pyramid_chameleon
+pyramid_jinja2
+wtforms
 pyramid_debugtoolbar
 pyramid_tm
 SQLAlchemy

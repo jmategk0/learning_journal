@@ -19,6 +19,7 @@ learning_journal/scripts/__init__.py
 learning_journal/scripts/initializedb.py
 learning_journal/static/pyramid-16x16.png
 learning_journal/static/pyramid.png
+learning_journal/static/styles.css
 learning_journal/static/theme.css
 learning_journal/static/theme.min.css
 learning_journal/templates/mytemplate.pt
